@@ -1,0 +1,129 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id               Int                @id @default(autoincrement())
+  email            String             @unique
+  passwordHash     String
+  name             String
+  phone            String?
+  examType         String?            // e.g. JEE, NEET, CAT
+  targetYear       Int?               // e.g. 2027
+  createdAt        DateTime           @default(now())
+  reviews          Review[]
+  savedColleges    SavedCollege[]
+  savedComparisons SavedComparison[]
+}
+
+model College {
+  id                   Int                @id @default(autoincrement())
+  name                 String
+  logoUrl              String
+  bannerUrl            String
+  locationCity         String
+  locationState        String
+  feesMin              Float              // Annual fees min
+  feesMax              Float              // Annual fees max
+  rating               Float              @default(0.0)
+  established          Int
+  naacGrade            String?            // NAAC A++, A+, etc.
+  nirfRank             Int?               // NIRF Ranking if applicable
+  ownership            String             // e.g. Public, Private, Government
+  type                 String             // e.g. Autonomous, Deemed, Affiliated
+  about                String
+  campusSize           Float?             // in acres
+  studentCount         Int?
+  facultyCount         Int?
+  affiliatedUniversity String?
+  regulatoryBody       String?            // UGC, AICTE, MCI, etc.
+  mapEmbedUrl          String?
+  createdAt            DateTime           @default(now())
+  courses              Course[]
+  placements           Placement[]
+  reviews              Review[]
+  savedColleges        SavedCollege[]
+  facilities           Facility?
+}
+
+model Course {
+  id            Int      @id @default(autoincrement())
+  collegeId     Int
+  college       College  @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+  name          String   // e.g., B.Tech Computer Science
+  level         String   // UG, PG, Diploma, Certificate
+  duration      String   // e.g., 4 Years, 2 Years
+  seats         Int
+  fees          Float    // Annual fees
+  eligibility   String   // e.g., 10+2 with 60% in PCM + JEE Main
+  admissionMode String   // e.g., JEE, NEET, Merit, Direct
+}
+
+model Placement {
+  id                 Int      @id @default(autoincrement())
+  collegeId          Int
+  college            College  @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+  year               Int      // e.g., 2025, 2024, 2023
+  avgPackage         Float    // in LPA (Lakhs Per Annum)
+  highestPackage     Float    // in LPA
+  medianPackage      Float    // in LPA
+  placementPercentage Float   // e.g. 92.5
+  recruitersJson     String   // JSON string of recruiter company names/logos
+}
+
+model Review {
+  id                     Int      @id @default(autoincrement())
+  collegeId              Int
+  college                College  @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+  userId                 Int
+  user                   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rating                 Float    // Overall rating (1-5)
+  academicsRating        Float
+  facultyRating          Float
+  placementsRating       Float
+  infrastructureRating   Float
+  socialLifeRating       Float
+  title                  String
+  body                   String
+  helpfulCount           Int      @default(0)
+  createdAt              DateTime @default(now())
+}
+
+model SavedCollege {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  collegeId Int
+  college   College  @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, collegeId])
+}
+
+model SavedComparison {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name        String   // Custom name for the shortlist e.g. "My Tech Shortlist"
+  collegeIds  String   // Comma separated college IDs or JSON string e.g. "1,2,3"
+  createdAt   DateTime @default(now())
+}
+
+model Facility {
+  id         Int     @id @default(autoincrement())
+  collegeId  Int     @unique
+  college    College @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+  library    Boolean @default(false)
+  hostel     Boolean @default(false)
+  sports     Boolean @default(false)
+  labs       Boolean @default(false)
+  wifi       Boolean @default(false)
+  cafeteria  Boolean @default(false)
+  gym        Boolean @default(false)
+  medical    Boolean @default(false)
+}
