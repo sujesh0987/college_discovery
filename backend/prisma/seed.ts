@@ -395,6 +395,101 @@ async function main() {
       reviews: [
         { rating: 4.7, academicsRating: 4.8, facultyRating: 4.7, placementsRating: 4.9, infrastructureRating: 4.3, socialLifeRating: 4.5, title: 'Strict academic calendar but incredible placements', body: 'The trimester system is extremely fast and demanding. Research assignments are tough. However, the placement record is 100% for corporate batches. The library has excellent database access.', userIdOffset: 3 }
       ]
+    },
+    {
+      name: 'Sharda University',
+      locationCity: 'Greater Noida',
+      locationState: 'Uttar Pradesh',
+      feesMin: 180000,
+      feesMax: 320000,
+      established: 2009,
+      naacGrade: 'A+',
+      nirfRank: 87,
+      ownership: 'Private',
+      type: 'Autonomous',
+      about: 'Sharda University is a leading private multidisciplinary university in Greater Noida, known for its diverse student body and modern infrastructure. It offers a global quality education with research-oriented coursework across multiple streams.',
+      campusSize: 63,
+      studentCount: 13000,
+      facultyCount: 900,
+      affiliatedUniversity: 'Autonomous',
+      regulatoryBody: 'UGC',
+      logoUrl: getLogo('Sharda University', '059669'),
+      bannerUrl: campusImages[0],
+      stream: 'Engineering',
+      courses: [
+        { name: 'B.Tech Computer Science & Engineering', level: 'UG', duration: '4 Years', seats: 240, fees: 220000, eligibility: '10+2 with 60% in PCM + SUAT/JEE Rank', admissionMode: 'JEE Main' },
+        { name: 'MBA Marketing', level: 'PG', duration: '2 Years', seats: 120, fees: 300000, eligibility: 'Graduation with 50% + CAT/MAT', admissionMode: 'CAT' }
+      ],
+      placements: [
+        { year: 2025, avgPackage: 6.2, highestPackage: 45.0, medianPackage: 5.5, placementPercentage: 88.0, recruitersJson: JSON.stringify(['Wipro', 'TCS', 'Cognizant', 'HDFC Bank', 'Amazon', 'Tech Mahindra']) }
+      ],
+      facilities: { library: true, hostel: true, sports: true, labs: true, wifi: true, cafeteria: true, gym: true, medical: true },
+      reviews: [
+        { rating: 4.2, academicsRating: 4.0, facultyRating: 4.1, placementsRating: 4.3, infrastructureRating: 4.5, socialLifeRating: 4.4, title: 'Amazing campus life and diverse student culture', body: 'The infrastructure of Sharda University is top class. Hostels are comfortable and the student community is highly diverse with many international students. Placements are solid for CS.', userIdOffset: 2 }
+      ]
+    },
+    {
+      name: 'Galgotias University',
+      locationCity: 'Greater Noida',
+      locationState: 'Uttar Pradesh',
+      feesMin: 149000,
+      feesMax: 159000,
+      established: 2011,
+      naacGrade: 'A+',
+      nirfRank: 101,
+      ownership: 'Private',
+      type: 'Autonomous',
+      about: 'Galgotias University is a premier private university in Greater Noida, celebrated for its high placement rates, modern coding curriculum, and state-of-the-art laboratory facilities.',
+      campusSize: 52,
+      studentCount: 15000,
+      facultyCount: 800,
+      affiliatedUniversity: 'Autonomous',
+      regulatoryBody: 'UGC',
+      logoUrl: getLogo('Galgotias University', '2563EB'),
+      bannerUrl: campusImages[2],
+      stream: 'Engineering',
+      courses: [
+        { name: 'B.Tech Computer Science & Engineering', level: 'UG', duration: '4 Years', seats: 360, fees: 159000, eligibility: '10+2 with 60% in PCM + JEE/GUAT', admissionMode: 'JEE Main' }
+      ],
+      placements: [
+        { year: 2025, avgPackage: 5.8, highestPackage: 35.0, medianPackage: 5.0, placementPercentage: 92.0, recruitersJson: JSON.stringify(['Infosys', 'TCS', 'Cognizant', 'Ericsson', 'Wipro']) }
+      ],
+      facilities: { library: true, hostel: true, sports: true, labs: true, wifi: true, cafeteria: true, gym: true, medical: true },
+      reviews: [
+        { rating: 4.1, academicsRating: 4.0, facultyRating: 3.9, placementsRating: 4.4, infrastructureRating: 4.2, socialLifeRating: 4.3, title: 'Excellent placement cell and coding culture', body: 'The placement cell is very active and brings many companies to the campus. Coding culture is growing and labs are modern. Campus is quite lively.', userIdOffset: 1 }
+      ]
+    },
+    {
+      name: 'Birla Institute of Management Technology (BIMTECH)',
+      locationCity: 'Greater Noida',
+      locationState: 'Uttar Pradesh',
+      feesMin: 600000,
+      feesMax: 700000,
+      established: 1988,
+      naacGrade: 'A+',
+      nirfRank: 48,
+      ownership: 'Private',
+      type: 'Deemed',
+      about: 'BIMTECH is a highly respected private business school in Greater Noida. Established in 1988 under the aegis of the Birla Group, it is renowned for its PGDM programs, high academic rigor, and exceptional placement records with top multinational firms.',
+      campusSize: 10,
+      studentCount: 800,
+      facultyCount: 75,
+      affiliatedUniversity: 'AICTE Approved',
+      regulatoryBody: 'AICTE',
+      logoUrl: getLogo('BIMTECH Noida', 'B91C1C'),
+      bannerUrl: campusImages[1],
+      stream: 'MBA',
+      courses: [
+        { name: 'PGDM General', level: 'PG', duration: '2 Years', seats: 240, fees: 650000, eligibility: 'Graduation with 50% + CAT/XAT/GMAT', admissionMode: 'CAT' },
+        { name: 'PGDM International Business', level: 'PG', duration: '2 Years', seats: 60, fees: 650000, eligibility: 'Graduation with 50% + CAT/XAT/GMAT', admissionMode: 'CAT' }
+      ],
+      placements: [
+        { year: 2025, avgPackage: 11.2, highestPackage: 24.4, medianPackage: 10.5, placementPercentage: 100.0, recruitersJson: JSON.stringify(['Deloitte', 'EY', 'KPMG', 'PwC', 'Infosys', 'ICICI Bank', 'Wipro']) }
+      ],
+      facilities: { library: true, hostel: true, sports: true, labs: true, wifi: true, cafeteria: true, gym: true, medical: true },
+      reviews: [
+        { rating: 4.4, academicsRating: 4.5, facultyRating: 4.4, placementsRating: 4.5, infrastructureRating: 4.3, socialLifeRating: 4.2, title: 'Superb management training with 100% placements', body: 'BIMTECH offers a rigorous management program. The faculty is highly experienced and coming from industry. Big 4 consulting and top private banks are regular recruiters.', userIdOffset: 3 }
+      ]
     }
   ];
 

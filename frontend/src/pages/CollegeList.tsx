@@ -64,22 +64,24 @@ export const CollegeList: React.FC<CollegeListProps> = ({
   }, [searchParams]);
 
   // Fetch filter options once
-  useEffect(() => {
-    const fetchFilters = async () => {
-      try {
-        const res = await apiFetch('/colleges/filters');
-        if (res.success && res.data) {
-          setFiltersData(res.data);
-        }
-      } catch (error) {
-        console.error('Failed to fetch filter options:', error);
-        showToast('Failed to load filters', 'error');
-      } finally {
-        setIsLoadingFilters(false);
+  const fetchFilters = useCallback(async () => {
+    setIsLoadingFilters(true);
+    try {
+      const res = await apiFetch('/colleges/filters');
+      if (res.success && res.data) {
+        setFiltersData(res.data);
       }
-    };
-    fetchFilters();
+    } catch (error) {
+      console.error('Failed to fetch filter options:', error);
+      showToast('Failed to load filters', 'error');
+    } finally {
+      setIsLoadingFilters(false);
+    }
   }, [showToast]);
+
+  useEffect(() => {
+    fetchFilters();
+  }, [fetchFilters]);
 
   // Fetch colleges list whenever search params change
   const fetchColleges = useCallback(async () => {
@@ -326,8 +328,18 @@ export const CollegeList: React.FC<CollegeListProps> = ({
               <div className="h-10 bg-gray-100 rounded animate-pulse"></div>
               <div className="h-10 bg-gray-100 rounded animate-pulse"></div>
             </div>
+          ) : !filtersData ? (
+            <div className="text-center py-6">
+              <p className="text-xs text-red-500 mb-3 font-semibold">Failed to load filters</p>
+              <button
+                onClick={fetchFilters}
+                className="px-4 py-2 bg-primary hover:bg-primary-dark text-white text-xs font-bold rounded-btn transition-colors cursor-pointer"
+              >
+                Retry
+              </button>
+            </div>
           ) : (
-            <div className="space-y-6 max-h-[calc(100vh-280px)] overflow-y-auto pr-1 no-scrollbar">
+            <div className="space-y-6 max-h-[calc(100vh-120px)] overflow-y-auto pr-2">
               {/* Streams Filter */}
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-secondary-text mb-3">Popular Streams</label>
@@ -652,7 +664,21 @@ export const CollegeList: React.FC<CollegeListProps> = ({
             </div>
 
             {isLoadingFilters ? (
-              <div>Loading...</div>
+              <div className="space-y-4 py-6">
+                <div className="h-10 bg-gray-100 rounded animate-pulse"></div>
+                <div className="h-10 bg-gray-100 rounded animate-pulse"></div>
+                <div className="h-10 bg-gray-100 rounded animate-pulse"></div>
+              </div>
+            ) : !filtersData ? (
+              <div className="text-center py-6">
+                <p className="text-xs text-red-500 mb-3 font-semibold">Failed to load filters</p>
+                <button
+                  onClick={fetchFilters}
+                  className="px-4 py-2 bg-primary hover:bg-primary-dark text-white text-xs font-bold rounded-btn transition-colors cursor-pointer"
+                >
+                  Retry
+                </button>
+              </div>
             ) : (
               <div className="space-y-6 flex-grow pb-8">
                 {/* Streams */}
